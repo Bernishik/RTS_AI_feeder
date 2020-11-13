@@ -1,13 +1,14 @@
 import crochet
+from scrapy.utils.project import get_project_settings
 
 crochet.setup()
 
 from flask import Flask, jsonify
 from scrapy.crawler import CrawlerRunner
-from crawler.crawler.spiders.quote_scraper import QuoteSpider
+from crawler.spiders.quote_scraper import QuoteSpider
 
 app = Flask(__name__)
-crawl_runner = CrawlerRunner()
+crawl_runner = CrawlerRunner(get_project_settings())
 quotes_list = []
 scrape_in_progress = False
 scrape_complete = False
@@ -28,6 +29,7 @@ def crawl_for_quotes():
         return 'SCRAPING'
 
     if scrape_complete:
+        print()
         return jsonify(quotes_list)
 
     return 'SCRAPE IN PROGRESS'
@@ -45,4 +47,4 @@ def finished_scrape(null):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0",debug=True)

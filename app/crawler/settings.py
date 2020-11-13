@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Scrapy settings for crawler project
 #
 # For simplicity, this file contains only settings considered important or
@@ -11,6 +12,8 @@ BOT_NAME = 'crawler'
 
 SPIDER_MODULES = ['crawler.spiders']
 NEWSPIDER_MODULE = 'crawler.spiders'
+
+
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
