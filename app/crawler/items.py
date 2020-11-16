@@ -11,7 +11,19 @@ class CrawlerItem(scrapy.Item):
     # name = scrapy.Field()
     pass
 
+
 class QuoteItems(scrapy.Item):
     quote = scrapy.Field()
     author = scrapy.Field()
     tags = scrapy.Field()
+
+
+class BiorxivCovinItem(scrapy.Item):
+    source = scrapy.Field()
+    title = scrapy.Field()
+    authors = scrapy.Field()
+    text = scrapy.Field()
+    competing_interest_statement = scrapy.Field()
+    funding_statement = scrapy.Field()
+    author_declarations = scrapy.Field()
+    data = scrapy.Field()

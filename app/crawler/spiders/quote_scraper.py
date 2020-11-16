@@ -33,10 +33,10 @@ class QuoteSpider(scrapy.Spider):
             item["tags"] = []
             for tag in quote.xpath('.//div[@class="tags"]//a[@class="tag"]/text()'):
                 item["tags"].append(tag.extract())
-            self.quotes_list.append({
-                'quote': item["quote"],
-                'author': item["author"],
-                'tags': item["tags"]})
+            # self.quotes_list.append({
+            #     'quote': item["quote"],
+            #     'author': item["author"],
+            #     'tags': item["tags"]})
             page_quote.append({
                 'quote': item["quote"],
                 'author': item["author"],

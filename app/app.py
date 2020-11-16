@@ -6,6 +6,7 @@ crochet.setup()
 from flask import Flask, jsonify
 from scrapy.crawler import CrawlerRunner
 from crawler.spiders.quote_scraper import QuoteSpider
+from crawler.spiders.biorxiv_covid_scraper import BiorxivCovidScraper
 
 app = Flask(__name__)
 crawl_runner = CrawlerRunner(get_project_settings())
@@ -30,14 +31,15 @@ def crawl_for_quotes():
 
     if scrape_complete:
         print()
-        return jsonify(quotes_list)
+        return "ok"
 
     return 'SCRAPE IN PROGRESS'
 
 
 @crochet.run_in_reactor
 def scrape_with_crochet(_list):
-    eventual = crawl_runner.crawl(QuoteSpider, quotes_list=_list)
+    # eventual = crawl_runner.crawl(QuoteSpider, quotes_list=_list)
+    eventual = crawl_runner.crawl(BiorxivCovidScraper, quotes_list=_list)
     eventual.addCallback(finished_scrape)
 
 

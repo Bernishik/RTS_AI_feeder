@@ -24,3 +24,18 @@ class CrawlerPipeline:
 #         line = json.dumps(ItemAdapter(item).asdict()) + "\n"
 #         self.file.write(line)
 #         return item
+
+# class BiorxivCovidSacraperPipeline:
+#     def open_spider(self, spider):
+#         # self.file = open('items.json', 'w')
+#         pass
+#
+#     def close_spider(self, spider):
+#         pass
+#         # self.file.close()
+#     def process_item(self,item,spider):
+#         # line = json.dumps(ItemAdapter(item).asdict()) + "\n"
+#         # self.file.write(line)
+#         print(item["title"])
+#         return item
+
