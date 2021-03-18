@@ -6,6 +6,7 @@ services:
       - 5000:5000
     volumes:
       - ./extracted_data:/app/extracted_data
+      - ./app/converted_text:/app/converted_text
     command: python3 ./app.py
 
 

@@ -18,7 +18,7 @@ class QuoteItems(scrapy.Item):
     tags = scrapy.Field()
 
 
-class BiorxivCovinItem(scrapy.Item):
+class BiorxivCovidItem(scrapy.Item):
     source = scrapy.Field()
     title = scrapy.Field()
     authors = scrapy.Field()

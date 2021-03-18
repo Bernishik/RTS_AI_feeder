@@ -1,6 +1,6 @@
 import json
 
-from  .items import QuoteItems
+from .items import QuoteItems
 # Define your item pipelines here
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
@@ -38,4 +38,3 @@ class CrawlerPipeline:
 #         # self.file.write(line)
 #         print(item["title"])
 #         return item
-

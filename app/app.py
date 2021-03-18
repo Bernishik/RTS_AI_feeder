@@ -1,14 +1,17 @@
 import crochet
 from scrapy.utils.project import get_project_settings
 
-crochet.setup()
+from flask import Flask, jsonify, request
 
-from flask import Flask, jsonify
 from scrapy.crawler import CrawlerRunner
 from crawler.spiders.quote_scraper import QuoteSpider
 from crawler.spiders.biorxiv_covid_scraper import BiorxivCovidScraper
+from text_converter import pdf_to_txt, docx_to_txt
+
+crochet.setup()
 
 app = Flask(__name__)
+
 crawl_runner = CrawlerRunner(get_project_settings())
 quotes_list = []
 scrape_in_progress = False
@@ -17,9 +20,7 @@ scrape_complete = False
 
 @app.route('/')
 def crawl_for_quotes():
-
     global scrape_in_progress
-    global scrape_complete
     global scrape_complete
 
     if not scrape_in_progress:
@@ -30,10 +31,23 @@ def crawl_for_quotes():
         return 'SCRAPING'
 
     if scrape_complete:
-        print()
         return "ok"
-
     return 'SCRAPE IN PROGRESS'
+
+
+@app.route('/convert')
+def convert_text():
+    data = request.get_json(force=True)
+
+    if 'pdf' in data:
+        pdf = data['pdf']
+        pdf_to_txt(pdf)
+
+    if 'docx' in data:
+        docx = data['docx']
+        docx_to_txt(docx)
+
+    return 'complete'
 
 
 @crochet.run_in_reactor
@@ -49,4 +63,4 @@ def finished_scrape(null):
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",debug=True)
+    app.run(host="0.0.0.0", debug=True)
