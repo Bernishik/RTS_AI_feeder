@@ -2,6 +2,7 @@ import io
 import requests
 from PyPDF2 import PdfFileReader
 import docx2txt
+from pathlib import Path
 
 
 # DOCX TO TXT CONVERTER
@@ -11,6 +12,7 @@ def docx_to_txt(link):
         file = io.BytesIO(response.content)
         text = docx2txt.process(file)
 
+        Path("converted_text/docx_to_txt/").mkdir(parents=True, exist_ok=True)
         with open('converted_text/docx_to_txt/file-{idx}.txt'.format(idx=idx), 'w') as file:
             file.write(text)
     return 'complete'
@@ -24,6 +26,7 @@ def pdf_to_txt(link):
 
         reader = PdfFileReader(file, strict=False)
 
+        Path("converted_text/pdf_to_txt/").mkdir(parents=True, exist_ok=True)
         with open('converted_text/pdf_to_txt/file-{idx}.txt'.format(idx=idx), 'w') as file:
             for i in range(reader.getNumPages()):
                 contents = str(reader.getPage(i).extractText())
